@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>블럭 요소- div ,p,pre,h1~h6</h2>
+    <p>블록 요소는 문서의 내용을 표시하는 구역을 설정합니다.시맨틱(의미가 있다) 태그 (header,nav,main,artcle....)
+        div 와 동일한 성격을 갖고 의미있는 단어를 사용한 것 뿐입니다.
+    </p>
+    <p>블록요소는 기본적으로 width(너비) 는 브라우저의 크기 100%.height(높이)는 자식요소의 크기 입니다
+        블록요소의 크기를 변경 하려면 <strong>width,height 스타일</strong>을 직접 설정 합니다.
+        <!--  Box Model(레이아웃과 관련된 CSS속성)
+             *wdith 박스의 너비
+             *height 박스의 높이
+             *padding 박스의 안쪽여백
+             *margin 박스의 바깥쪽의 여백
+             *border 박스의 테두리 
+             박스의 크기를 결정하는 값은 ? 너비,높이,padding,boder
+             width : 200 pxm height 300px padding 30px boder 2px 일떄 박스의 크기?
+             가로는 264 px,세로크기는 364px
+             *box-sizing ; 로하면 boder-box => padding, boder 포함하여 width 가로크기 hegiht 세로크기
+             -->
+             
+    </div></p>
+    <p>문서 최상위 요소인  Body 너비는 100%(웹 브라우저 ), 높이도 자식 요소의 크기</p>
+    <div style="background-color: aqua;width:300px;height: 300px;">
+        div 첫번쨰 테스트-px 단위를 사용하려면 항상 고정된 크기를 설정합니다.(절대값)
+        <!---->
+    </div>
+    <div style="background-color: rgb(18, 19, 18) width 40% height 30%;">
+         div 두번쨰 테스트- % 단위를 사용하면 부모요소의 크기를 기준으로 설정합니다.(상대값)
+         현재 div 의 부모 요소는 body.body 의 width(너비는) 브라우저의 100% 입니다,
+         body 의 높이는(height)는 자식요소의 크기만큼으로 설정 됩니다.
+    </div>
+    
+        
+             부모(노랑)가 있는 div 세번쨰테스트
+            
+    
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="12FlexBox.css">
+    <title>Flex 레이아웃</title>
+</head>
+<body>
+    <h3> row rowwap</h3>
+    <div class="container flex-row">
+        <div>H</div>
+        <div>T</div>
+        <div>M</div>
+        <div>L</div>
+    </div>
+<!-- grow(성장/늘어나다) 
+     값이 0이면 안늘어나고 1.크기가 늘어난다-->
+     <h3> row rowwap flex-grow: 1</h3>
+    <div class="container flex-row">
+        <div>H</div>
+        <div style="flex-grow: 1;">T</div>
+        <div style="flex-grow: 2;">M</div>
+        <div>L</div>
+    
+      <h3> row rowwap justify-content:  space-evenly</h3>
+      <!-- justitfy-content 는 브모의요소 공간이 많을 떄 정렬(flex-direction 방향)방식을 정합니다-->
+    <div class="container flex-row wrap" style="justify-content:  space-evenly;" >
+        <div>H</div>
+        <div>T</div>
+        <div>M</div>
+        <div>L</div>
+      <h3> row rowwap ustify-content:  space-around</h3>
+      <!-- justitfy-content 는 브모의요소 공간이 많을 떄 정렬방식을 정합니다-->
+    <div class="container flex-row wrap" style="justify-content:  space-around;" >
+        <div>H</div>
+        <div>T</div>
+        <div>M</div>
+        <div>L</div>
+</body>
+</html>

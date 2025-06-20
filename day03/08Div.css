@@ -1,0 +1,32 @@
+div.container{
+    width: 400px;
+    margin: 5%;  
+    float: left;                                                                       
+     
+
+}
+div.css{border:2px solid rgb(60, 255, 0);}
+div,html{border:2px solid rgb(207, 35, 12);}
+div.bottom{
+    border-right: 1px solid gray;
+    
+}
+/*여러곳에서 사용되는 속성은 별도로 정의 */
+span {
+            display: inline-block;/*인라인 특징을 유지하면서 블록처럼 크기설정*/
+            padding: 4px 10px;
+            
+}
+
+/*span 요소 - 단순히 텍스트를 감싸기 위한 목적.(별도의 스타일 지정 가능)*/
+span.title {
+    width: 25%;
+    border-right: 1px solid gray;
+    text-align: center;
+    font-weight: 600;
+    font-family: "Malgun Gothic";
+}
+div.header{"font-weight:600 ;font-size: 1.6rem;">HTML}
+div.log{"text-align: center;padding: 7% 15%;border-bottom: 1px solid gray;}
+div.table{border-bottom: 1px solid gray;}
+div.footer{text-align: center;padding-top: 2px;}

@@ -1,0 +1,18 @@
+.container{
+    min-width: 90PX;
+    min-height: 300px;
+    margin: 0 100px 100px 0px;
+    background-color: blue;
+}
+.container> div{width: 80px;
+    height: 80px;
+    border: 2px dotted blueviolet;} 
+    
+    .flex-row{
+        display: flex;
+        /*레이아웃 방향  row 방향 기본값*/
+        flex-direction: row;
+    }
+    .wrap{ 
+        /*기본갓은 nowrap*/
+        flex-wrap: wrap;}

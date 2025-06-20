@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사용자 입력 Form</title>
+</head>
+<body>
+    <h3>사용자 입력 폼/<h3>
+        <!-- 기본형식 :서버에 전송할 데이터를 입력하는 목적.
+          form 태그안에 iuput 을 배치한다
+        데이터를 전달 받는 서버의 주소는 action 속성에 설정합니다.
+        서버의 주소가 내부일 떄는 파일명만 작성.-->
+     <!-- 실제 데이터를 받는 것은 html 에서는 불가 임시로 화면만 바꿉니다
+      전달하는 데이터를 구분하기 윟 '이름' 개발자가 지어주어야 합니다.
+      input 요소의 name 속성에 설정합니다.-->
+    <form action="success.html">
+    <input type="text" name="userid">
+     <button type="submit">전송</button>
+    </form>
+     <p>
+        데이터를 입력하고  '전송'버튼을 클릭하면 주소창이 바뀝니다.
+        http://127.0.0.1:5500/day03/10Pom%EC%82%AC%EC%9A%A9%EC%9E%90%EC%9E%85%EB%A0%A5.html
+    
+    </p>
+    <hr>
+    <h3>입력 데이터 2개</h3>
+
+    
+</form>
+<form action="success.html">
+    <div>
+        <input type="text" name="userid" placeholder="아이디를 입력하세요">
+    </div>
+     <div>
+        <input type="text" name="location" placeholder="지역을 입력하세요">
+    </div>
+     <div>
+        <button type="submit">전송</button>
+    </div>
+</form>
+<!--
+http://127.0.0.1:5500/day03/success.html?userid=&location=
+
+?userid=&location=-- 는 쿼리(query) 문자열이라고 합니다.
+userid=&location=서울 값을 서버에 전송 .&는 연결기호.
+wonder&location 값을 서버에 전송
+전달하는 데이터를 구분하기 윟 '이름' 개발자가 지어주어야 합니다.
+input 요소의 name 속성에 설정합니다.
+-->
+<hr>
+    <h3>다양한 input type 테스트</h3>
+
+    
+</form>
+<form action="success.html">
+    <div>
+        <input type="hideen" name="code" value="XA002">
+    </div>
+    <div>
+        <!-- age 데이터의 기본값25 을 설정 value(값)-->
+        <input type="number" name="age" placeholder=나이를 입력하세요 value="25">
+    </div>
+     <div>
+        <input type="date" name="checkin" placeholder="예약날짜를 입력하세요">
+    </div>
+     <div>
+        <button type="submit">전송</button>
+    </div>
+
+</form>
+<!-- http://127.0.0.1:5500/day03/success.html?code=XA002&age=20&checkin=0013-01-03
+ TYPE= "hiden" 은 화면에는 안보이고 서보로는 전송하고 싶을 떄 사용-->
+</body>
+</html>
