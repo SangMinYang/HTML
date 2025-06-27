@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=bu, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   
+
+    <img src="./images/pic_bulboff.gif" alt="OFF" width="70px"
+    style=" cursor: pointer;">
+    <button id="btn1"></button>
+  
+    <!-- 버튼 클릭할떄 마다 'ON','OFF' 토굴(toggle) -->
+     <script>
+        const img = document.querySelector('img')//태그이름을 선택자 사용
+        const btn2 = document .getElementById('btn2')
+        // 토글 기능을 변수를 이용해서 제어
+        let isOn = false // true('ON'),false('OFF')
+        let btnText
+        const bulbOFF ="./images/pic_bulboff.gif"
+        const bulbON = "./images/pic_bulbon.gif"
+        let bulbImg
+        
+        btn2.addEventListener('click',()=>{ })
+        //  자주 사용하는 함수를 변수에 저장
+        // const onoff = ()=>{
+
+        // })
+        const onoff = function(){}
+        if(isOn){ //ON 상태 -isOn 이 true 일떄 실행
+            btnText= 'OFF'
+            bulbImg = bulbOFF
+            }else {//OFF 상태
+                btnText = 'ON'
+                bulbImg = bulbON
+            }
+            btn1.textContent = btnText
+            img.src = bulbImg
+            //isOn 상태를 현재 상태와 반대 (! 연산) 로 변경
+            //ture true 이면 false,false이면 true 로 변경
+           
+            isOn = !isOn
+
+            btn.addEventListener('click',onoff)
+            img,addEventListener('click',onoff)
+      
+     </script>
+</body>
+</html>

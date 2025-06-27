@@ -1,0 +1,690 @@
+/*모바일 마이페이지*/
+.contents-wrap .bottom-btn{
+    display: flex;
+    flex-direction: column;
+}
+
+.contents-wrap .bottom-btn button{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap:4px;
+    font-size: 14px;
+    color: #121212;
+    height: 40px;
+    padding: 0 8px;
+    border-bottom: 1px solid #F4F4F4;
+}
+
+.contents-wrap .bottom-btn button img{
+    width: 18px;
+    height: 18px;
+}
+
+
+/* F&B 기프트 박스/바베큐 교환권 */
+.contents-wrap.welcome .contents-container .tab-btn{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 32px;
+    width: fit-content;
+    @media all and (min-width:768px){
+        gap: 24px;
+    }
+
+}
+
+.contents-wrap.welcome .contents-container .tab-btn button {
+    width: 100%;
+    height: 48px;
+    font-size: 14px;
+    color: #747474;
+    max-width: 180px;
+    white-space: nowrap;
+}
+
+.contents-wrap.welcome .contents-container .tab-btn button.active{
+    color: #121212;
+    border-bottom: 2px solid #000;
+    font-weight: 600;
+}
+
+.contents-wrap.welcome .contents-container .ticket__wrap{
+    display: grid;
+    align-items: stretch;
+    grid-template-columns: repeat(1, 1fr);
+    column-gap: 20px;
+    row-gap: 20px;
+    @media all and (min-width:768px){
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 20px;
+        row-gap: 24px;
+    }
+
+    @media all and (min-width:1140px){
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+
+
+.contents-wrap .ticket__wrap .ticket{
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    min-height: 100px;
+    box-shadow: 4px 4px 10px 0px rgba(7, 29, 61, 0.10);
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #FFFFFF;
+}
+
+.contents-wrap .ticket__wrap .ticket.family{
+    border-left: 4px solid #19509A ;
+}
+
+.contents-wrap .ticket__wrap .ticket.bbq{
+    border-left: 4px solid #BE6E1D ;
+}
+
+.contents-wrap .ticket__wrap .ticket.bundle{
+    border-left: 4px solid #1D99A7 ;
+}
+
+.contents-wrap .ticket__wrap .ticket.campnic{
+    border-left: 4px solid #09AE7C ;
+}
+
+.contents-wrap .ticket__wrap .ticket__info{
+    padding: 16px;
+    width: 100%;
+}
+
+.contents-wrap .ticket__wrap .ticket .badge{
+    font-size: 12px;
+    color: #FFFFFF;
+    padding: 2px 6px;
+    line-height: 16px;
+    display: block;
+    width: fit-content;
+    margin-bottom: 4px;
+}
+
+.contents-wrap .ticket__wrap .ticket.family .badge {
+    background-color: #19509A;
+}
+
+.contents-wrap .ticket__wrap .ticket.bbq .badge{
+    background-color: #BE6E1D;
+}
+
+.contents-wrap .ticket__wrap .ticket.bundle .badge{
+    background-color: #1D99A7;
+}
+
+.contents-wrap .ticket__wrap .ticket.campnic .badge{
+    background-color: #09AE7C;
+}
+
+.contents-wrap .ticket__wrap .ticket .ticket__info .info{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.contents-wrap .ticket__wrap .ticket .ticket__info p{
+    font-size: 12px;
+    color: #747474;
+    line-height: 16px;
+}
+
+.contents-wrap .ticket__wrap .ticket .ticket__info .info p{
+    font-size: 14px;
+    color: #121212;
+    margin-right: 6px;
+    line-height: 18px;
+    font-weight: 600;
+}
+
+.contents-wrap .ticket__wrap .ticket .ticket__info .info span{
+    font-size: 12px;
+    color: #747474;
+    line-height: 18px;
+}
+
+.contents-wrap .ticket__wrap .ticket .ticket__info .info span{
+    font-size: 12px;
+    color: #747474;
+    line-height: 18px;
+}
+
+.ticket__btn{
+    width: 80px;
+    min-width: 80px;
+    height: auto;
+    background: url("/assets/images/bg-ticket@2x-4e3953b613bba218b6eea286595e98ab.png") no-repeat  center/ 100% 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+}
+
+.ticket__btn button{
+    font-size: 12px;
+    line-height: 18px;
+    padding: 5px 6px;
+    border-radius: 2px;
+    background-color: #071D3D ;
+    color: #FFFFFF;
+}
+
+.ticket__btn button.gift-btn{
+    background-color: #C7A079 ;
+    color: #FFFFFF;
+}
+
+
+/*공통 form*/
+.contents-wrap .form{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.contents-wrap .form .desc{
+    font-size: 12px;
+    margin: 6px 0  24px;
+    color: #747474;
+}
+
+.contents-wrap .form .form-btn{
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    line-height: 16px;
+    padding: 12px;
+}
+
+.contents-wrap .form .form__flex{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    gap: 6px;
+}
+
+.contents-wrap .form .form__flex button{
+    font-size: 14px;
+    padding: 0 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    height: 40px;
+    line-height: 38px;
+}
+
+.contents-wrap label.label{
+    padding: 0 2px;
+    margin-bottom: 4px;
+    line-height: 20px;
+    font-size: 14px;
+    color: #222222;
+}
+
+.contents-wrap input[type='text'] , .contents-wrap input[type='password']{
+    background-color: #fff;
+    border: 1px solid #e4e4e4;
+    cursor: auto;
+    font-size: 12px;
+    padding: 0 10px;
+    width: 100% !important;
+    height: 40px;
+    line-height: 40px;
+}
+
+.solid.black{
+    background-color: #071D3D;
+    border: 1px solid #071D3D;
+    border-radius: 2px;
+    color: #FFFFFF;
+}
+
+.solid.gold{
+    background-color: #C7A079 ;
+    border: 1px solid #C7A079;
+    border-radius: 2px;
+    color: #FFFFFF;
+}
+
+.use-info{
+    width: 100%;
+    max-width: 1000px;
+    margin: 16px auto;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    @media all and (min-width:768px){
+        justify-content: flex-start;
+    }
+}
+
+.use-info button{
+    padding: 8px 12px;
+    display: block;
+    background-color: #32ADE6;
+    border-radius: 100px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+#useDiv{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 50;
+}
+
+#useDiv .use-container .btn-close{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+#useDiv  .use-container{
+    background-color: #fff;
+    position: relative;
+    width: 90vw;
+    max-width: 400px;
+    max-height: 65vh;
+    padding: 36px 20px 32px ;
+    border-radius: 10px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    margin-top: 80px;
+}
+
+#useDiv  .use-container .content h1{
+    font-size: 18px;
+    color: #121212;
+    font-weight: 700;
+    margin-bottom: 28px;
+}
+
+#useDiv  .use-container .content .use-detail{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+#useDiv  .use-container .content .use-detail li{
+    display: flex;
+    gap: 12px;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+#useDiv  .use-container .content .use-detail img{
+    width: 32px;
+    height: 32px;
+}
+
+#useDiv  .use-container .content .use-detail li div{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 4px 0;
+}
+
+#useDiv  .use-container .content .use-detail li div h3{
+    margin-bottom: 4px;
+    font-size: 16px;
+    color: #222222;
+    font-weight: 700;
+}
+
+#useDiv  .use-container .content .use-detail li div p{
+    font-size: 14px;
+    color: #484F5A;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 6px;
+    line-height: 20px;
+}
+
+#useDiv  .use-container .content .use-detail li div p span{
+    width: 18px;
+    height: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #484F5A;
+    color: #FFFFFF;
+    font-size: 12px;
+    border-radius: 100px;
+}
+
+.photo button.cancel{
+    background-color: #E10707 !important;
+}
+
+.photo button.cancel-complete{
+    background-color: #B1B1B1 !important;
+}
+
+
+/*그라운드 포토타임 모달*/
+#modalDiv{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 50;
+}
+
+#modalDiv .modal-container{
+    width: 90vw;
+    max-width: 360px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.15);
+}
+
+#modalDiv .modal-container .modal-header{
+    background-color: #071D3D ;
+    padding: 20px 12px;
+}
+
+#modalDiv .modal-container .modal-header h1{
+    color: #FFFFFF;
+    font-size: 16px;
+    text-align: center;
+    font-weight: 600;
+}
+
+#modalDiv .modal-container .content{
+    padding: 12px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#modalDiv .modal-container .content p{
+    text-align: center;
+}
+
+#modalDiv .modal-container .modal-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    padding: 0 16px 16px;
+}
+
+#modalDiv .modal-container .modal-btn button{
+    padding: 16px;
+    width: 100%;
+}
+
+#modalDiv .modal-container .modal-btn button.close{
+    background-color: #cacaca;
+    color: #FFFFFF;
+}
+
+#modalDiv .modal-container .modal-btn button.submit{
+    background-color: #071D3D;
+    color: #FFFFFF;
+}
+
+/*번들권*/
+.bundle .bundle-wrap{
+    background-color: #F9F9FA ;
+}
+
+.bundle .bundle-wrap .bundle-content::after{
+    content: '';
+    display: block;
+    width: 100%;
+    height: 4px;
+    background-color: #F1F1F1;
+    border-top: 1px solid #E2DFDF;
+}
+
+.bundle .bundle-wrap .bundle-content:last-child::after{
+   display: none;
+}
+
+.bundle .bundle-wrap .bundle-content .content{
+    padding: 40px 16px;
+    max-width: 400px;
+    margin: 0 auto;
+    @media all and (min-width:768px){
+        padding: 60px;
+    }
+}
+
+.bundle .bundle-wrap .bundle-content .content h1{
+    font-size: 18px;
+    color: #071D3D;
+    font-weight: 700;
+    margin-bottom: 28px;
+    text-align: center;
+    @media all and (min-width:768px){
+        font-size: 24px;
+        margin-bottom: 36px;
+    }
+}
+
+/*번들 이용권 - 섹션1 게임 리스트*/
+.bundle .bundle-wrap .bundle-content .content .game-detail {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.bundle .bundle-wrap .bundle-content .content .game-detail li{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
+
+.bundle .bundle-wrap .bundle-content .content .game-detail li .num{
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    background-color: #484F5A;
+    border-radius: 100px;
+    color: #FFFFFF;
+    line-height: 10%;
+    @media all and (min-width:768px){
+        font-size: 16px;
+        width: 24px;
+        height: 24px;
+    }
+}
+
+.bundle .bundle-wrap .bundle-content .content .game-detail li .title{
+    font-size: 16px;
+    color: #484F5A;
+    font-weight: 500;
+    @media all and (min-width:768px){
+        font-size: 18px;
+    }
+}
+
+/*번들 이용권 - 섹션2 사용방법*/
+.bundle .bundle-wrap .bundle-content .content .use-detail {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 24px;
+    @media all and (min-width:768px){
+        gap: 32px;
+    }
+}
+.bundle .bundle-wrap .bundle-content .content .use-detail li{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.bundle .bundle-wrap .bundle-content .content .use-detail li img{
+    width: 28px;
+    height: 28px;
+    @media all and (min-width:768px){
+        width: 36px;
+        height: 36px;
+    }
+}
+
+.bundle .bundle-wrap .bundle-content .content .use-detail li h3{
+    font-size: 16px;
+    font-weight: 700;
+    color: #222222;
+    margin-bottom: 12px;
+    @media all and (min-width:768px){
+        font-size: 18px;
+    }
+}
+
+.bundle .bundle-wrap .bundle-content .content .use-detail li p{
+    font-size: 14px;
+    color: #747474;
+    line-height: 140%;
+    @media all and (min-width:768px){
+        font-size: 16px;
+    }
+}
+
+
+.bundle .bundle-wrap .bundle-content .content .ticket__wrap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 16px;
+}
+
+
+/*메인 - 구단소식 프로그램 리스트*/
+.program-wrap li{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 12px;
+}
+
+.program-wrap li a{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.program-wrap li a .title{
+    margin-bottom: 4px;
+    color: #121212;
+}
+
+.program-wrap li a p{
+    color: #666666;
+}
+
+.program-wrap li a .info{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.program-wrap li a .info p:last-child::before{
+    content: '';
+    display: inline-block;
+    width: 1px;
+    height: 12px;
+    background-color: #121212;
+    margin: 0 6px;
+}
+
+.program-wrap li .status .badge{
+    padding: 4px 12px;
+    border-radius: 100px;
+    background-color: #121212;
+    color: #FFFFFF;
+    display: block;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.program-wrap li .status .badge.applying{
+    background-color: #003BFF;
+}
+
+.program-wrap li .status .badge.complete{
+    background-color: #A8A8A8;
+}
+
+
+/*프로그램 상세*/
+.program-view .title{
+    padding-bottom: 0 !important;
+}
+
+.program-view .program-info{
+    padding: 12px 8px;
+    border-bottom: 1px solid #dbdbdb;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+}
+.program-view .program-info p{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    font-size: 14px;
+    color: #121212;
+    gap: 4px;
+    white-space: nowrap;
+    line-height: 1.4;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

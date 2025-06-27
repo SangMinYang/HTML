@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>박스 이동하기</title>
+    <style>
+        html,body { padding:0px ; margin: 0px;}
+        div.nav > button{
+            width: 60px; height:  60px;
+        }
+        div.nav {
+            height: 100px;
+            background-color: aqua;
+            display: flex; justify-content: center; align-items: center;
+        }
+        div#box{
+            width: 150px;
+            height: 150px;
+            background-color: rgb(65, 5, 40);
+        }
+        div.main{
+            background-color: white;
+            /* 남은 영역을 '높이' 로 설정하는계산  css 함수 calc()*/
+            /* 브라우저의 전체 높이 - nav 영역 높이 100px (계산식 - 기호 양쪽에 공백 필수) */
+            height: calc(100vh - 100px );
+            /* 자식 요소를 수직,수평 방향 모두 중앙 배치 */
+            display: flex; justify-content: center; align-items: center; 
+        }
+        div#box{
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container"><!--가장 바깥쪽 박스-->
+        <!-- 첫번쨰 윗줄 박스-->
+         <div class="nav">
+            <button id="top">👆</button><button id="right">👉</button>
+            <button id="down">👇</button><button id="left">👈</button>
+            
+         </div>
+         <div class="main">
+            <div id="box"></div>
+
+         </div>
+
+    </div>
+        <script>
+    
+        const container = document.getElementById('container')
+         const box = document.getElementById('box')
+
+         document.body.addEventListener('keydown', e => {
+            console.log('이벤트정보',e)
+            const currentLeft=box.offsetLeft   //현재 box의 위치
+            const currentTop=box.offsetTop
+            // 현재 box 의 크기
+            const currentWidth = box.offsetWidth
+            const currentTop = bpx.offsetHeight
+            const parentWidth = parent.offsetWidth
+            const parentHight = parent.offsetHeight
+            switch(e.key){   //눌려진 키보드 키를 검사
+                case 'ArrowUp':
+                  console.log('방향 위를 눌렀습니다.')
+                  if(currentTop-10 > 100) { 
+                    box.style.top = (currentTop - 10) + 'px'
+                  }
+                  break
+                case 'ArrowRight':
+                  console.log('방향 오른쪽을 눌렀습니다.')
+                  if(currentLeft + currentWidth +10 > parentWidth){
+                  box.style.left = (currentLeft + 10) + 'px'
+                  }
+                  break;
+                case 'ArrowDown':
+                  console.log('방향 아래를 눌렀습니다.')
+                  if(currentTop - 100 + currentHeight +10 < parentHight){
+                     box.style.top = (currentTop + 10) + 'px'
+                     }
+                  break;
+                case 'ArrowLeft':
+                  console.log('방향 왼쪽을 눌렀습니다.')
+                  if(currentLeft - 10 > 0){
+                    box.style.left = (currentLeft - 10) + 'px'
+                  }
+                  break;
+              }
+         })
+       container.addEventListener('click',
+            function (event) {
+                if (event.target.tagName === 'BUTTON') {
+                    console.log(event.target.id)
+                    //이벤트를 발생시킨 요소(target)의 id 속성값
+
+                    // 함수 실행할때마다,현재 박스의 너비/높이 크기를 저장하기
+                    const currentWidth = box.offsetWidth
+                    const currentHeight = box.offsetHeight
+                    // 크기는 10px 만큼 변경하기
+
+                    if(event.target.id==='top') {    // 중첩 if (다른 if에 포함됨)
+                      console.log('박스가 작아집니다.(높이)')
+                      box.style.height = (currentHeight-10) + 'px'
+                    }else if(event.target.id==='down'){
+                      //앞의 조건 event.target.id==='top' 거짓일 때, 다른 조건을 다시 검사
+                      console.log('박스가 커집니다.(높이)')
+                      box.style.height=(currentHeight+10) +'px'
+                    }else if(event.target.id==='left'){
+                      console.log('박스가 작아집니다.(너비)')
+                      box.style.width =(currentWidth-10) +'px'
+                    }else if(event.target.id==='right'){
+                      box.style.width =(currentWidth+10) + 'px'
+                      console.log('박스가 커집니다.(너비)')
+                    }
+                }
+            }   
+        )
+
+        // 자바스크립 에서 BOX 요소 다루기
+        // -> 크기(너비width,높이height) ,좌표(LEFT(X좌표),TOP(Y좌표))
+        // 값을 가져올 떄는 - offsetxxx
+        // 값을 설정할떄는 -box.style.width = '100px'
+        
+        
+    </script>
+</body>
+</html>

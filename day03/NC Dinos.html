@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<!-- saved from url=(0024)https://www.ncdinos.com/ -->
+<html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NC Dinos</title>
+    <link rel="stylesheet" href="./NC Dinos_files/swiper.min.css">
+    <link rel="stylesheet" href="./NC Dinos_files/style.css">
+    <link rel="stylesheet" href="./NC Dinos_files/min_style.css">
+    <link rel=" shortcut icon" href="https://www.ncdinos.com/assets/images/favicon.ico">
+    <link rel="icon" href="https://www.ncdinos.com/assets/images/favicon.ico">
+    <script src="./NC Dinos_files/jquery.min.js.다운로드"></script>
+    <script src="./NC Dinos_files/swiper.min.js.다운로드"></script>
+    <script src="./NC Dinos_files/script.js.다운로드"></script>
+    <script src="./NC Dinos_files/common.js.다운로드"></script>
+    <script type="text/javascript">
+        function gameResult(gmKey) {
+            postPage({
+                url: "/game/majorScore.do",
+                vals: [
+                    ["type", "gmKey"],
+                    ["gmKey", gmKey]
+                ]
+            });
+        }
+
+        function gameInfo(gmKey, homeName, awayName, dateStr, stadium) {
+            var title = homeName + " vs " + awayName + " " + dateStr + " " + stadium;
+            $("div#head-info > h1").text(title);
+        }
+
+    </script>
+<script src="./NC Dinos_files/js" async=""></script></head>
+<body>
+<header class="index-header">
+    
+
+
+<meta name="naver-site-verification" content="2028e0548ebc3fd80a9c35c9acf81746677945d3">
+
+<script>
+  const ticket = () => {
+    window.open("/auth/ticket.do", "티켓", "width=480, height=650");
+      // window.open("/auth/ticket.do", "티켓", "width=1024, height=768");
+  }
+</script>
+
+<script>
+
+  (function () {
+    const ajax = $.ajax;
+    $.ajax = (args) => {
+      const err = args.error;
+      args.error = (xhr, status, error) => {
+        if (xhr.status === 401) {
+          refreshToken(() => {
+            ajax(args);
+          })
+        } else {
+          if (err) {
+            err(xhr, status, error);
+          }
+        }
+      }
+      return ajax(args);
+    }
+  })();
+
+  (() => {
+    const fetch = window.fetch;
+    window.fetch = (...args) => (async(args) => {
+      var result = await fetch(...args);
+      if (result.status === 401) {
+        await refreshTokenAsync();
+        result = await fetch(...args);
+        return result;
+      } else {
+        return result;
+      }
+    })(args);
+  })();
+
+  function refreshToken(callback) {
+    const refreshToken = getCookie("refreshToken");
+    if (!refreshToken) {
+      deleteCookie('token');
+      deleteCookie('refreshToken');
+      location.href = "/";
+    }
+
+    const data = {
+      refreshToken: refreshToken,
+    }
+    $.ajax({
+      url        : 'https://api.ncdinos.com/auth/refresh',
+      data       : JSON.stringify(data),
+      type       : 'post',
+      contentType: 'application/json',
+    }).done(function (res) {
+      setCookie('token', res.token, '30');
+      setCookie('refreshToken', res.refreshToken, '30');
+      try {
+        if (window.flutter_inappwebview &&
+                window.flutter_inappwebview.callHandler) {
+          window.flutter_inappwebview.callHandler('refresh', res.token, res.refreshToken).then(function(result) {
+            if (callback) {
+              callback();
+            }
+          });
+        } else {
+          if (callback) {
+            callback();
+          }
+        }
+      } catch (e) {
+
+      }
+    }).fail(function (xhr, status, errorThrown) {
+      alert(xhr.responseJSON.message);
+      deleteCookie('token');
+      deleteCookie('refreshToken');
+      location.href = "/";
+    })
+  }
+
+
+  async function refreshTokenAsync() {
+    const refreshToken = getCookie("refreshToken");
+    if (!refreshToken) {
+      deleteCookie('token');
+      deleteCookie('refreshToken');
+      location.href = "/";
+    }
+
+    const data = {
+      refreshToken: refreshToken,
+    }
+
+    const res = await fetch('https://api.ncdinos.com/auth/refresh', {
+      method : 'post',
+      body   : JSON.stringify(data),
+      headers: {
+        'content-type': 'application/json'
+      }
+    });
+    if (res.status === 200) {
+      const json = await res.json();
+      setCookie('token', json.token, '30');
+      setCookie('refreshToken', json.refreshToken, '30');
+      try {
+        if (window.flutter_inappwebview &&
+                window.flutter_inappwebview.callHandler) {
+          await window.flutter_inappwebview.callHandler('refresh', json.token, json.refreshToken);
+        }
+      } catch (e) {
+
+      }
+    } else {
+      deleteCookie('token');
+      deleteCookie('refreshToken');
+      location.href = "/";
+    }
+  }
+</script>
+
+<nav class="top-nav">
+  <ul class="f-wrap">
+    <li><a onclick="ticket()" style="cursor: pointer;">티켓</a></li>
+    <li><a href="https://www.ncdinos.com/auth/shop.do">팀스토어</a></li>
+    <li><a href="https://www.ncdinospodshop.com/">POD샵</a></li>
+
+    <li class="sns-wrap">
+      
+        
+        
+          <a href="https://www.ncdinos.com/auth/login.do" style="cursor:pointer">로그인</a>
+          <a href="https://www.ncdinos.com/auth/join.do" style="cursor:pointer">회원가입</a>
+        
+      
+    </li>
+  </ul>
+</nav>
+<div class="header-wrap null">
+  <div>
+    <h1 class="logo"><a href="https://www.ncdinos.com/homepage.do" class="hidden">NC Dinos</a></h1>
+    <nav class="menu-wrap">
+      <ul class="menu f-wrap">
+          <li class="">
+              <a href="https://www.ncdinos.com/dinos/intro.do">다이노스</a>
+              <ul class="s-menu">
+                  <li class=""><a href="https://www.ncdinos.com/dinos/intro.do">구단소개</a></li>
+                  <li class=""><a href="https://www.ncdinos.com/dinos/news.do">구단소식</a></li>
+                  <li class=""><a href="https://www.ncdinos.com/dinos/vi.do">구단VI</a></li>
+                  <li class=""><a href="https://www.ncdinos.com/dinos/stadium.do">구장, 시설안내</a></li>
+                      
+                  <li class=""><a href="https://www.ncdinos.com/dinos/socialcontribution.do">D-NATION</a></li>
+                  <li class=""><a href="https://www.ncdinos.com/dinos/partner.do">후원, 제휴</a></li>
+                      
+              </ul>
+          </li>
+          <li class="">
+              <a href="https://www.ncdinos.com/story/photo.do">스토리</a>
+              <ul class="s-menu">
+                  <li class=""><a href="https://www.ncdinos.com/story/photo.do">포토</a></li>
+                  <li class=""><a href="https://www.ncdinos.com/story/movie.do">영상</a></li>
+                      
+              </ul>
+          </li>
+          <li class="name-wrap ">
+              <a href="https://www.ncdinos.com/game/majorSchedule.do">경기정보</a>
+              <ul class="s-menu">
+                  <li class="name">정규리그</li>
+                  <li class=""><a href="https://www.ncdinos.com/game/majorSchedule.do">경기일정/결과</a></li>
+                  <li class=""><a href="https://www.ncdinos.com/game/majorScore.do">박스 스코어</a></li>
+                  <li class=""><a href="https://www.ncdinos.com/game/majorGameNote.do">게임노트</a></li>
+                  <li class="name">퓨처스</li>
+                  <li class=""><a href="https://www.ncdinos.com/game/minorSchedule.do">경기 일정/결과</a></li>
+                  <li class=""><a href="https://www.ncdinos.com/game/minorScore.do">박스 스코어</a></li>
+              </ul>
+          </li>
+          <li class="name-wrap ">
+              <a href="https://www.ncdinos.com/record/majorRank.do">기록실</a>
+              <ul class="s-menu">
+                  <li class="name">정규리그</li>
+                  <li class=""><a href="https://www.ncdinos.com/record/majorRank.do">팀기록</a></li>
+
+
+                  <li class="name">퓨처스</li>
+                  <li class=""><a href="https://www.ncdinos.com/record/minorRank.do">팀기록</a></li>
+
+
+              </ul>
+          </li>
+          <li class="">
+              <a href="https://www.ncdinos.com/player/all/list.do">선수단</a>
+              <ul class="s-menu">
+                  <li class=""><a href="https://www.ncdinos.com/player/all/list.do">선수단 전체</a></li>
+                  <li class=""><a href="https://www.ncdinos.com/player/staff/list.do">코칭스태프</a></li>
+                  <li class=""><a href="https://www.ncdinos.com/player/trainer/list.do">트레이너</a></li>
+                  <li class=""><a href="https://www.ncdinos.com/player/pitcher/list.do">투수</a></li>
+                  <li class=""><a href="https://www.ncdinos.com/player/catcher/list.do">포수</a></li>
+                  <li class=""><a href="https://www.ncdinos.com/player/infielder/list.do">내야수</a></li>
+                  <li class=""><a href="https://www.ncdinos.com/player/outfielder/list.do">외야수</a></li>
+
+              </ul>
+          </li>
+          <li class="">
+
+              <a href="https://www.ncdinos.com/fan/rally/list.do">팬</a>
+              <ul class="s-menu">
+                  <li class=""><a href="https://www.ncdinos.com/fan/rally/list.do">랠리 다이노스</a></li>
+
+                  <li class=""><a href="https://www.ncdinos.com/fan/music.do">다이노스 뮤직</a></li>
+                  <li class=""><a href="https://www.ncdinos.com/fan/wallPaper.do">월페이퍼</a></li>
+                  <li class=""><a href="https://www.ncdinos.com/term/contact.do">의견보내기</a></li>
+                  <li class=""><a href="https://www.ncdinos.com/fan/groundPhoto.do">그라운드 포토타임</a></li>
+
+                  <li class=""><a href="https://www.ncdinos.com/fan/tourProgram.do">투어 프로그램</a></li>
+
+              </ul>
+          </li>
+
+          <li class="">
+              <a href="https://www.ncdinos.com/junior/index.do">주니어 다이노스</a>
+              <ul class="s-menu">
+                  <li class=""><a href="https://www.ncdinos.com/junior/index.do">소개</a></li>
+                  <li class=""><a href="https://www.ncdinos.com/junior/event.do?eventType=4">베이스볼 아카데미</a></li>
+                  <li class=""><a href="https://www.ncdinos.com/junior/event.do?eventType=5">응원타임</a></li>
+                  <li class=""><a href="https://www.ncdinos.com/junior/event.do?eventType=6">응원타임 클래스</a></li>
+
+
+
+              </ul>
+          </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<!-- 홈페이지 메인 헤더 E -->
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="./NC Dinos_files/firebase-app.js.다운로드"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="./NC Dinos_files/firebase-analytics.js.다운로드"></script>
+<script src="./NC Dinos_files/firebase-auth.js.다운로드"></script>
+<script src="./NC Dinos_files/firebase-firestore.js.다운로드"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  var firebaseConfig = {
+    apiKey: "AIzaSyDhG3maCXe7tbFXq__CwtcZWSRfMiCh5Cc",
+    authDomain: "nc-dinos-homepage.firebaseapp.com",
+    projectId: "nc-dinos-homepage",
+    storageBucket: "nc-dinos-homepage.appspot.com",
+    messagingSenderId: "1037410650333",
+    appId: "1:1037410650333:web:b92f90d8490608cae93334",
+    measurementId: "G-BZZSH21F9E"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  var link = window.location.pathname;
+  firebase.analytics().logEvent('homepage', {"view": link} );
+
+
+
+  const logout = () => {
+
+    var refreshToken = getCookie("refreshToken");
+
+    $.ajax({
+      url        : 'https://api.ncdinos.com/auth/logout',
+      data: JSON.stringify({
+        "refreshToken": refreshToken
+      }),
+      type       : 'post',
+      contentType: 'application/json',
+      success : function(data){
+        deleteCookie("token");
+        deleteCookie("refreshToken");
+        location.href = "/logout";
+      },
+      error : function(xhr, status, error){
+        alert(xhr.responseJSON.message);
+      }
+    });
+
+    // deleteCookie("token");
+    // deleteCookie("refreshToken");
+    // location.href = "/logout";
+  }
+</script>
+
+</header>
+<main>
+    <section class="main-banner">
+        <script>
+            function ticketBannerPop(url){
+                window.open(url, "티켓", "width=1024, height=768");
+            }
+
+        </script>
+        <div class="slider swiper-container-fade swiper-container-initialized swiper-container-horizontal" style="background : #061d3d">
+            <div class="swiper-wrapper" style="transition-duration: 0ms;">
+                
+                    <div class="swiper-slide" style="width: 1169px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;">
+                        <a href="https://www.ncdinos.com/" target="_blank"><img src="./NC Dinos_files/0b9040afe5b94a9f82973dd863bfddc0_20250527_102747.png" alt=""></a>
+                    </div>
+                
+                    <div class="swiper-slide" style="width: 1169px; opacity: 1; transform: translate3d(-1169px, 0px, 0px); transition-duration: 0ms;">
+                        <a href="https://ncdinospodshop.cafe24.com/product/search.html?banner_action=&amp;keyword=%EC%95%84%ED%81%AC%EB%A6%B4+%EB%93%B1%EC%8B%A0%EB%8C%80" target="_blank"><img src="./NC Dinos_files/e6e5eca3d01e4a0d85d09bd96df5fd28_20250514_030034.jpg" alt=""></a>
+                    </div>
+                
+                    <div class="swiper-slide swiper-slide-prev" style="width: 1169px; opacity: 1; transform: translate3d(-2338px, 0px, 0px); transition-duration: 0ms;">
+                        <a href="https://www.ncdinos.com/fan/wallPaper.do" target="_blank"><img src="./NC Dinos_files/226af5ed01664dbda1b6c3582373295b_20250528_081124.jpg" alt=""></a>
+                    </div>
+                
+                    <div class="swiper-slide swiper-slide-active" style="width: 1169px; opacity: 1; transform: translate3d(-3507px, 0px, 0px); transition-duration: 0ms;">
+                        <a href="https://ncdinospodshop.cafe24.com/product/search.html?banner_action=&amp;keyword=%ED%9C%98%EC%B9%9C%EC%9E%90" target="_blank"><img src="./NC Dinos_files/86f6b11b30224786bbf6273712c7f2ae_20250304_084456.jpg" alt=""></a>
+                    </div>
+                
+            </div>
+            <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 1"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 2"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 3"></span><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 4"></span></div>
+        <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span><span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+
+        <div>
+            <div class="ticket-swiper-wrap">
+                
+                    
+                    
+                        <div class="swiper ticketSwiper swiper-container-initialized swiper-container-horizontal">
+                            <div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px);">
+                                
+
+                                
+                                    <div class="swiper-slide swiper-slide-active" onclick="goReservation(&#39;/games/379&#39;)" style="width: 192px; margin-right: 10px;">
+                                        <div class="ticket-sm type3">
+                                            <div class="verse">
+                                                <img src="./NC Dinos_files/MAJOR_LT.png">
+                                                <div>
+                                                    <h2><span>VS</span> 롯데</h2>
+                                                    <p>2025.06.24(화) 18:30</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                                    <div class="swiper-slide swiper-slide-next" onclick="goReservation(&#39;/games/380&#39;)" style="width: 192px; margin-right: 10px;">
+                                        <div class="ticket-sm type3">
+                                            <div class="verse">
+                                                <img src="./NC Dinos_files/MAJOR_LT.png">
+                                                <div>
+                                                    <h2><span>VS</span> 롯데</h2>
+                                                    <p>2025.06.25(수) 18:30</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                                    <div class="swiper-slide" onclick="goReservation(&#39;/games/381&#39;)" style="width: 192px; margin-right: 10px;">
+                                        <div class="ticket-sm type3">
+                                            <div class="verse">
+                                                <img src="./NC Dinos_files/MAJOR_LT.png">
+                                                <div>
+                                                    <h2><span>VS</span> 롯데</h2>
+                                                    <p>2025.06.26(목) 18:30</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                                    <div class="swiper-slide" onclick="goReservation(&#39;/games/382&#39;)" style="width: 192px; margin-right: 10px;">
+                                        <div class="ticket-sm type3">
+                                            <div class="verse">
+                                                <img src="./NC Dinos_files/MAJOR_OB.png">
+                                                <div>
+                                                    <h2><span>VS</span> 두산</h2>
+                                                    <p>2025.06.27(금) 18:30</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                                    <div class="swiper-slide" onclick="goReservation(&#39;/games/383&#39;)" style="width: 192px; margin-right: 10px;">
+                                        <div class="ticket-sm type3">
+                                            <div class="verse">
+                                                <img src="./NC Dinos_files/MAJOR_OB.png">
+                                                <div>
+                                                    <h2><span>VS</span> 두산</h2>
+                                                    <p>2025.06.28(토) 17:00</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                                    <div class="swiper-slide" onclick="goReservation(&#39;/games/384&#39;)" style="width: 192px; margin-right: 10px;">
+                                        <div class="ticket-sm type3">
+                                            <div class="verse">
+                                                <img src="./NC Dinos_files/MAJOR_OB.png">
+                                                <div>
+                                                    <h2><span>VS</span> 두산</h2>
+                                                    <p>2025.06.29(일) 17:00</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+
+                            </div>
+                        <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+                        <div class="ticket-swiper-button">
+                            <div class="ticket-swiper-button-next" tabindex="0" role="button" aria-label="Next slide" aria-disabled="false"></div>
+                            <div class="ticket-swiper-button-prev swiper-button-disabled" tabindex="0" role="button" aria-label="Previous slide" aria-disabled="true"></div>
+                        </div>
+                        <script>
+                            var ticketSwiper = new Swiper(".ticketSwiper", {
+                                slidesPerView: 5,
+                                spaceBetween: 10,
+                                navigation: {
+                                    prevEl: ".ticket-swiper-button-prev",
+                                    nextEl: ".ticket-swiper-button-next",
+                                },
+                            });
+
+                            function goReservation(link) {
+                                
+                                
+                                location.href='/auth/login.do';
+                                
+                            }
+                        </script>
+                    
+                
+            </div>
+        </div>
+
+        <div class="board-box f-wrap">
+            <div class="item f-wrap">
+                <span class="txt-blue-light">공지사항</span>
+                <a href="https://www.ncdinos.com/dinos/notice/view.do?seq=541787" class="txt">'도구리 데이가 돌아온다’… NC 다이노스, 27일(금)~29일(일) 홈경기 이벤트 진행</a>
+                <span class="date roboto">06-20</span>
+            </div>
+            <div class="item f-wrap">
+                <span class="txt-mint">이벤트</span>
+                <a href="https://www.ncdinos.com/dinos/event/view.do?seq=44983" class="txt">2025시즌 오픈프랙티스 안내 </a>
+                <span class="date roboto">05-27</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="board main-board">
+        <div class="con f-wrap main-notice-new">
+            <div class="tab-board">
+                <h2>구단소식</h2>
+                <p>NC 다이노스의 다양한 소식들을 만나보세요</p>
+                <a href="https://www.ncdinos.com/dinos/news.do" class="more"><span class="ico ico-more">더보기</span></a>
+                <div class="tabs f-wrap">
+                    <button class="active">전체</button>
+                    <button>공지사항</button>
+                    <button>이벤트</button>
+
+
+                </div>
+                <div class="tab-container">
+                    <ul class="cont active">
+                        
+                            <li>
+                                <span class="sort">공지사항</span>
+                                <a href="https://www.ncdinos.com/dinos/notice/view.do?seq=541787" class="tit new">
+                                    '도구리 데이가 돌아온다’… NC 다이노스, 27일(금)~29일(일) 홈경기 이벤트 진행
+                                </a>
+                                <span class="date">2025-06-20</span>
+                            </li>
+                        
+                            <li>
+                                <span class="sort">공지사항</span>
+                                <a href="https://www.ncdinos.com/dinos/notice/view.do?seq=541786" class="tit new">
+                                    NC 다이노스 스폰서 동성 모터스, 주장 박민우에 차량 후원
+                                </a>
+                                <span class="date">2025-06-13</span>
+                            </li>
+                        
+                            <li>
+                                <span class="sort">공지사항</span>
+                                <a href="https://www.ncdinos.com/dinos/notice/view.do?seq=541785" class="tit new">
+                                    ‘김형준 플레이어 데이’ 열린다… NC 다이노스, 13일(금)~15일(일) 홈경기 이벤트 진행
+                                </a>
+                                <span class="date">2025-06-10</span>
+                            </li>
+                        
+                            <li>
+                                <span class="sort">공지사항</span>
+                                <a href="https://www.ncdinos.com/dinos/notice/view.do?seq=541784" class="tit new">
+                                    NC 다이노스-SSG 랜더스, 외야수 김성욱↔지명권+현금 트레이드 진행 
+                                </a>
+                                <span class="date">2025-06-07</span>
+                            </li>
+                        
+                            <li>
+                                <span class="sort">공지사항</span>
+                                <a href="https://www.ncdinos.com/dinos/notice/view.do?seq=541783" class="tit new">
+                                    NC 다이노스, 5월 MVP에 투수 류진욱∙야수 천재환 선정
+                                </a>
+                                <span class="date">2025-06-05</span>
+                            </li>
+                        
+                    </ul>
+                    <ul class="cont">
+                        
+                            <li>
+                                <span class="sort">공지사항</span>
+                                <a href="https://www.ncdinos.com/dinos/notice/view.do?seq=541787" class="tit new">
+                                    '도구리 데이가 돌아온다’… NC 다이노스, 27일(금)~29일(일) 홈경기 이벤트 진행
+                                </a>
+                                <span class="date">2025-06-20</span>
+                            </li>
+                        
+                            <li>
+                                <span class="sort">공지사항</span>
+                                <a href="https://www.ncdinos.com/dinos/notice/view.do?seq=541786" class="tit new">
+                                    NC 다이노스 스폰서 동성 모터스, 주장 박민우에 차량 후원
+                                </a>
+                                <span class="date">2025-06-13</span>
+                            </li>
+                        
+                            <li>
+                                <span class="sort">공지사항</span>
+                                <a href="https://www.ncdinos.com/dinos/notice/view.do?seq=541785" class="tit new">
+                                    ‘김형준 플레이어 데이’ 열린다… NC 다이노스, 13일(금)~15일(일) 홈경기 이벤트 진행
+                                </a>
+                                <span class="date">2025-06-10</span>
+                            </li>
+                        
+                            <li>
+                                <span class="sort">공지사항</span>
+                                <a href="https://www.ncdinos.com/dinos/notice/view.do?seq=541784" class="tit new">
+                                    NC 다이노스-SSG 랜더스, 외야수 김성욱↔지명권+현금 트레이드 진행 
+                                </a>
+                                <span class="date">2025-06-07</span>
+                            </li>
+                        
+                            <li>
+                                <span class="sort">공지사항</span>
+                                <a href="https://www.ncdinos.com/dinos/notice/view.do?seq=541783" class="tit new">
+                                    NC 다이노스, 5월 MVP에 투수 류진욱∙야수 천재환 선정
+                                </a>
+                                <span class="date">2025-06-05</span>
+                            </li>
+                        
+                    </ul>
+                    <ul class="cont">
+                        
+                            <li>
+                                <span class="sort">이벤트</span>
+                                <a href="https://www.ncdinos.com/dinos/event/view.do?seq=44983" class="tit new">
+                                    2025시즌 오픈프랙티스 안내 
+                                </a>
+                                <span class="date">2025-05-27</span>
+                            </li>
+                        
+                            <li>
+                                <span class="sort">이벤트</span>
+                                <a href="https://www.ncdinos.com/dinos/event/view.do?seq=44982" class="tit">
+                                    2025시즌 창원NC파크 전광판 기념일 광고 이벤트
+                                </a>
+                                <span class="date">2025-03-21</span>
+                            </li>
+                        
+                            <li>
+                                <span class="sort">이벤트</span>
+                                <a href="https://www.ncdinos.com/dinos/event/view.do?seq=44980" class="tit">
+                                    가상티켓 예매 이벤트
+                                </a>
+                                <span class="date">2025-01-31</span>
+                            </li>
+                        
+                            <li>
+                                <span class="sort">이벤트</span>
+                                <a href="https://www.ncdinos.com/dinos/event/view.do?seq=44978" class="tit">
+                                    2024 타운홀 미팅 상세 안내
+                                </a>
+                                <span class="date">2024-11-21</span>
+                            </li>
+                        
+                            <li>
+                                <span class="sort">이벤트</span>
+                                <a href="https://www.ncdinos.com/dinos/event/view.do?seq=44977" class="tit">
+                                    10월 엔팍 별다방클래스 안내
+                                </a>
+                                <span class="date">2024-10-18</span>
+                            </li>
+                        
+                    </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </div>
+            </div>
+            <div class="story">
+                <h3><img src="./NC Dinos_files/nc_story_txt.png" alt="NC DINOS STORY"></h3>
+                <p>공룡의 꿈을 향한 NC 다이노스의 발자취와<br>
+                    팬 여러분의 이야기가 함께하는 공간입니다.</p>
+                <ul class="sns-wrap f-wrap">
+                    <li>
+                        <a href="http://www.youtube.com/user/ncdinos" target="_blank">
+                            <img src="./NC Dinos_files/ic_story_youtube.png" alt="유투브">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://www.instagram.com/ncdinos2011" target="_blank">
+                            <img src="./NC Dinos_files/ic_story_instagram.png" alt="인스타그램">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.instagram.com/ncdinos_futures" target="_blank">
+                            <img src="./NC Dinos_files/ic_story_futures.svg" alt="퓨쳐스">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://www.facebook.com/ncdinos" target="_blank">
+                            <img src="./NC Dinos_files/ic_story_facebook.png" alt="페이스북">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/ncdinos_fan" target="_blank">
+                            <img src="./NC Dinos_files/ic_story_twitter.png" alt="트위터">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+
+        <section class="event-main" style="display: none;">
+            <div class="con">
+                <h2>지금 진행중인 이벤트</h2>
+                <a href="https://www.ncdinos.com/fan/event.do" class="more"><span class="ico ico-more">더보기</span></a>
+                <div class="event-slider swiper-container-initialized swiper-container-horizontal">
+                    <div class="swiper-wrapper" style="transition-duration: 0ms;">
+                          <div class="swiper-slide">
+                              <a href="https://www.ncdinos.com/fan/tourProgram.do" class="img">
+                                  <img src="./NC Dinos_files/tour-program-thumb.jpg">
+                              </a>
+                              <a href="https://www.ncdinos.com/fan/tourProgram.do" class="txt">
+                                  <strong class="title">투어프로그램</strong>
+                                  <span class="date">2024.04.06 ~ 2024.08.25</span>
+                              </a>
+                          </div>
+
+                        
+                            <div class="swiper-slide">
+                                <a href="https://www.ncdinos.com/fan/event/detail.do?seq=408" class="img">
+                                    <img src="./NC Dinos_files/tw_101de2e8101f43c8911f17a948053b11_20250620_074727.jpg" alt="">
+                                </a>
+                                <a href="https://www.ncdinos.com/fan/event/detail.do?seq=408" class="txt">
+                                    <strong class="title">2025시즌 투어 프로그램 안내</strong>
+                                    <span class="date">2025.06.21 ~ 2025.06.27</span>
+                                </a>
+                            </div>
+                        
+
+                    </div>
+                    <div class="event-pagination swiper-pagination-clickable swiper-pagination-bullets"></div>
+                <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+                <div class="event swiper-button-next" tabindex="0" role="button" aria-label="Next slide" aria-disabled="false"></div>
+                <div class="event swiper-button-prev" tabindex="0" role="button" aria-label="Previous slide" aria-disabled="false"></div>
+                <script>
+                    var swiper = new Swiper(".event-slider", {
+                        loop: false,
+                        slidesPerView: 4,
+                        spaceBetween: 20,
+                        slidesPerGroup: 1,
+                        navigation: {
+                            nextEl: ".swiper-button-next",
+                            prevEl: ".swiper-button-prev",
+                        },
+                        pagination: {
+                            el: ".event-pagination",
+                            clickable: true,
+                        },
+                    });
+                </script>
+            </div>
+        </section>
+
+
+    <section class="tv">
+        <div class="con">
+            <h2>다이노스 영상</h2>
+            <p>NC 다이노스의 업로드 영상을 확인하세요!</p>
+            <div class="f-wrap">
+                
+                    
+                        <div class="gall video-gall">
+                            <a href="https://www.ncdinos.com/story/movie/view.do?seq=61530" class="img new">
+                                <div class="ab-box">
+                                    <span class="date">2025-06-22</span>
+                                    <strong class="title">
+                                        
+                                            작전명: 이중도루   정원의 발과 민우의 적시타가 만든 결승점!...
+                                        
+                                        
+                                    </strong>
+                                </div>
+                                <span class="img-wrap">
+		              	<img src="./NC Dinos_files/sddefault.jpg" alt="" style="width: 100%;">
+		              </span>
+                            </a>
+                        </div>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                <div class="gall style2">
+                    
+                        
+                    
+                        
+                            <div>
+                                <a href="https://www.ncdinos.com/story/movie/view.do?seq=61529" class="img">
+                                    <img src="./NC Dinos_files/sddefault(1).jpg" alt="">
+                                </a>
+                                <a href="https://www.ncdinos.com/story/movie/view.do?seq=61529" class="txt">
+                                    <strong class="title">
+                                        
+                                        
+                                            [   ] 6월 22일 NC vs KT
+                                        
+                                    </strong>
+                                    <span class="date">2025-06-22</span>
+                                </a>
+                            </div>
+                        
+                    
+                        
+                            <div>
+                                <a href="https://www.ncdinos.com/story/movie/view.do?seq=61518" class="img">
+                                    <img src="./NC Dinos_files/sddefault(2).jpg" alt="">
+                                </a>
+                                <a href="https://www.ncdinos.com/story/movie/view.do?seq=61518" class="txt">
+                                    <strong class="title">
+                                        
+                                            마운드 위 짜릿한 외침! 위기 상황을 지운 지훈의 포효 #ncdinos ...
+                                        
+                                        
+                                    </strong>
+                                    <span class="date">2025-06-21</span>
+                                </a>
+                            </div>
+                        
+                    
+                        
+                            <div>
+                                <a href="https://www.ncdinos.com/story/movie/view.do?seq=61512" class="img">
+                                    <img src="./NC Dinos_files/sddefault(3).jpg" alt="">
+                                </a>
+                                <a href="https://www.ncdinos.com/story/movie/view.do?seq=61512" class="txt">
+                                    <strong class="title">
+                                        
+                                        
+                                            548일째 되던 날 | 상무 전역 비하인드
+                                        
+                                    </strong>
+                                    <span class="date">2025-06-21</span>
+                                </a>
+                            </div>
+                        
+                    
+                </div>
+            </div>
+            <a href="https://www.ncdinos.com/story/movie.do" class="more"><span class="ico ico-more">더보기</span></a>
+        </div>
+    </section>
+
+    <section class="news">
+        <div class="con">
+            <h2>다이노스 포토</h2>
+            <a href="https://www.ncdinos.com/story/photo.do" class="more"><span class="ico ico-more">더보기</span></a>
+            <div class="slider">
+                <div class="gall swiper-container-initialized swiper-container-horizontal">
+                    <div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;">
+                        
+                            <div class="swiper-slide swiper-slide-active" style="width: 225.5px; margin-right: 10px;">
+                                <a href="https://www.ncdinos.com/story/photo/view.do?seq=61528" class="img">
+                                    <img src="./NC Dinos_files/tw_f02c62f83dea4147bca9ffbecbb93cd4_20250622_081254.jpg" alt="">
+                                </a>
+                                <a href="https://www.ncdinos.com/story/photo/view.do?seq=61528" class="txt">
+                                    <strong class="title">
+                                            [사진첩] 2025 정규시즌 NC 2 - 0 KT (2025. 6. 22.  수원 KT위즈파크)
+                                    </strong>
+                                    <span class="date">2025-06-22</span>
+                                </a>
+                            </div>
+                        
+                            <div class="swiper-slide swiper-slide-next" style="width: 225.5px; margin-right: 10px;">
+                                <a href="https://www.ncdinos.com/story/photo/view.do?seq=61517" class="img">
+                                    <img src="./NC Dinos_files/tw_7419d140b4d345b1bf070a09c41e4803_20250621_082525.jpg" alt="">
+                                </a>
+                                <a href="https://www.ncdinos.com/story/photo/view.do?seq=61517" class="txt">
+                                    <strong class="title">
+                                            [사진첩] 2025 정규시즌 NC 5 - 7 KT (2025. 6. 21.  수원 KT위즈파크)
+                                    </strong>
+                                    <span class="date">2025-06-21</span>
+                                </a>
+                            </div>
+                        
+                            <div class="swiper-slide" style="width: 225.5px; margin-right: 10px;">
+                                <a href="https://www.ncdinos.com/story/photo/view.do?seq=61496" class="img">
+                                    <img src="./NC Dinos_files/tw_afce4843e3ad4c179b5145a85c1d43ea_20250619_103601.jpg" alt="">
+                                </a>
+                                <a href="https://www.ncdinos.com/story/photo/view.do?seq=61496" class="txt">
+                                    <strong class="title">
+                                            [사진첩] 2025 정규시즌 NC 3 - 0 LG (2025. 6. 19.  잠실야구장)
+                                    </strong>
+                                    <span class="date">2025-06-19</span>
+                                </a>
+                            </div>
+                        
+                            <div class="swiper-slide" style="width: 225.5px; margin-right: 10px;">
+                                <a href="https://www.ncdinos.com/story/photo/view.do?seq=61485" class="img">
+                                    <img src="./NC Dinos_files/tw_cbcea55304504022b5281a127807cd89_20250618_114325.jpg" alt="">
+                                </a>
+                                <a href="https://www.ncdinos.com/story/photo/view.do?seq=61485" class="txt">
+                                    <strong class="title">
+                                            [사진첩] 2025 정규시즌 NC 8 - 9 LG (2025. 6. 18.  잠실야구장)
+                                    </strong>
+                                    <span class="date">2025-06-18</span>
+                                </a>
+                            </div>
+                        
+                            <div class="swiper-slide" style="width: 225.5px; margin-right: 10px;">
+                                <a href="https://www.ncdinos.com/story/photo/view.do?seq=61474" class="img">
+                                    <img src="./NC Dinos_files/tw_2262e8d5551a49d5af685a6298285f36_20250617_095024.jpg" alt="">
+                                </a>
+                                <a href="https://www.ncdinos.com/story/photo/view.do?seq=61474" class="txt">
+                                    <strong class="title">
+                                            [사진첩] 2025 정규시즌 NC 6 - 2 LG (2025. 6. 17.  잠실야구장)
+                                    </strong>
+                                    <span class="date">2025-06-17</span>
+                                </a>
+                            </div>
+                        
+                            <div class="swiper-slide" style="width: 225.5px; margin-right: 10px;">
+                                <a href="https://www.ncdinos.com/story/photo/view.do?seq=61454" class="img">
+                                    <img src="./NC Dinos_files/tw_9de484a5c9b34b2182b49ae92ba502d9_20250615_085656.jpg" alt="">
+                                </a>
+                                <a href="https://www.ncdinos.com/story/photo/view.do?seq=61454" class="txt">
+                                    <strong class="title">
+                                            [사진첩] 2025 정규시즌 기아 4 - 2 NC (2025. 6. 15. 창원엔씨파크)
+                                    </strong>
+                                    <span class="date">2025-06-15</span>
+                                </a>
+                            </div>
+                        
+                            <div class="swiper-slide" style="width: 225.5px; margin-right: 10px;">
+                                <a href="https://www.ncdinos.com/story/photo/view.do?seq=61443" class="img">
+                                    <img src="./NC Dinos_files/tw_1b3fc9a0150a475da53c0210a34780d0_20250614_090217.jpg" alt="">
+                                </a>
+                                <a href="https://www.ncdinos.com/story/photo/view.do?seq=61443" class="txt">
+                                    <strong class="title">
+                                            [사진첩] 2025 정규시즌 기아 9 - 8 NC (2025. 6. 14. 창원엔씨파크)
+                                    </strong>
+                                    <span class="date">2025-06-14</span>
+                                </a>
+                            </div>
+                        
+                            <div class="swiper-slide" style="width: 225.5px; margin-right: 10px;">
+                                <a href="https://www.ncdinos.com/story/photo/view.do?seq=61432" class="img">
+                                    <img src="./NC Dinos_files/tw_8ed173d955cf4f2cbd237c59cb656291_20250613_101334.jpg" alt="">
+                                </a>
+                                <a href="https://www.ncdinos.com/story/photo/view.do?seq=61432" class="txt">
+                                    <strong class="title">
+                                            [사진첩] 2025 정규시즌 기아 1 - 4 NC (2025. 6. 13. 창원엔씨파크)
+                                    </strong>
+                                    <span class="date">2025-06-13</span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+                <!-- Add Pagination -->
+                <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 2"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 3"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 4"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 5"></span></div>
+                <!-- Add Arrows -->
+                <div class="ico ico-next" tabindex="0" role="button" aria-label="Next slide" aria-disabled="false"></div>
+                <div class="ico ico-prev swiper-button-disabled" tabindex="0" role="button" aria-label="Previous slide" aria-disabled="true"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="last">
+        <div class="con f-wrap" style="text-align: center;">
+            
+            
+            
+            
+            
+            
+            
+            <ul class="main-bottom-banner-wrap">
+                <li>
+                    <a href="https://www.ncdinos.com/dinos/socialcontribution.do">
+                        <strong>D-NATION</strong>
+                        <span class="txt">
+            NC 다이노스는 지역사회에 대한<br>지속가능한 기여를 실천합니다.
+          </span>
+                        <span class="ico ico-people"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.ncdinos.com/fan/wallPaper.do">
+                        <strong>다이노스 월페이퍼</strong>
+                        <span class="txt"> NC 다이노스의 주요 일정을<br>바탕 화면으로 만나보세요. </span>
+                        <span class="ico ico-computer"></span>
+                    </a>
+                </li>
+
+
+
+            </ul>
+        </div>
+    </section>
+</main>
+
+<footer class="index-header">
+    
+
+
+
+<script>
+  const chatbot = () => {
+    window.open('/auth/chatbot.do', 'nc-web', 'top=10, left=10, width=400, height=600, status=no, menubar=no, toolbar=no, resizable=no')
+  }
+</script>
+
+
+  <a href="javascript:chatbot();" style="position: fixed; bottom: 60px; right: 60px">
+    <img src="./NC Dinos_files/btn_won_chatbot@3x.png" style="width: 8rem; height: 8rem;">
+  </a>
+
+
+<div class="partner">
+  <div class="slider swiper-container-initialized swiper-container-horizontal">
+    <div class="swiper-wrapper" style="transition-duration: 0ms; transform: translate3d(-3600px, 0px, 0px);"><a href="https://www.tongyeong.go.kr/main.web" class="swiper-slide swiper-slide-duplicate" target="_blank" data-swiper-slide-index="9" style="width: 200px;">
+          <img src="./NC Dinos_files/partner_tongyeong.png" alt="통영시">
+      </a><a href="https://smartstore.naver.com/busanmilk" class="swiper-slide swiper-slide-duplicate" target="_blank" data-swiper-slide-index="10" style="width: 200px;">
+          <img src="./NC Dinos_files/partner_busanMilk.png" alt="부산우유">
+      </a><a href="http://www.camc.co.kr/" class="swiper-slide swiper-slide-duplicate" target="_blank" data-swiper-slide-index="11" style="width: 200px;">
+        <img src="./NC Dinos_files/img_footerlogo_11.jpg" alt="청아병원">
+      </a><a href="http://www.muruphospital.com/" class="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-prev" target="_blank" data-swiper-slide-index="12" style="width: 200px;">
+        <img src="./NC Dinos_files/img_footerlogo_13.jpg" alt="무룹병원">
+      </a><a href="https://www.365plant.co.kr/" class="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-active" target="_blank" data-swiper-slide-index="13" style="width: 200px;">
+        <img src="./NC Dinos_files/365dental.png" alt="365바른치과">
+      </a>
+      <a href="https://kr.ncsoft.com/kr/index.do" class="swiper-slide swiper-slide-duplicate-next" target="_blank" data-swiper-slide-index="0" style="width: 200px;">
+        <img src="./NC Dinos_files/img_footerlogo_01_2024.jpg" alt="NC">
+      </a>
+      <a href="https://banking.nonghyup.com/" class="swiper-slide" target="_blank" data-swiper-slide-index="1" style="width: 200px;">
+        <img src="./NC Dinos_files/img_footerlogo_02.jpg" alt="NH bank">
+      </a>
+      <a href="http://www.pkpork.co.kr/" class="swiper-slide" target="_blank" data-swiper-slide-index="2" style="width: 200px;">
+        <img src="./NC Dinos_files/img_footerlogo_03.jpg" alt="부경양돈농협">
+      </a>
+      <a href="http://brand.pkpork.co.kr/" class="swiper-slide" target="_blank" data-swiper-slide-index="3" style="width: 200px;">
+        <img src="./NC Dinos_files/img_footerlogo_04.jpg" alt="포크밸리">
+      </a>
+      <a href="https://www.hitejinro.com/" class="swiper-slide" target="_blank" data-swiper-slide-index="4" style="width: 200px;">
+        <img src="./NC Dinos_files/img_footerlogo_16.jpg" alt="켈리">
+      </a>
+      <a href="https://www.knbank.co.kr/" class="swiper-slide" target="_blank" data-swiper-slide-index="5" style="width: 200px;">
+        <img src="./NC Dinos_files/img_footerlogo_06.jpg" alt="BNK 경남은행">
+      </a>
+      <a href="https://www.abllife.co.kr/" class="swiper-slide" target="_blank" data-swiper-slide-index="6" style="width: 200px;">
+        <img src="./NC Dinos_files/img_footerlogo_07.jpg" alt="ABL">
+      </a>
+      <a href="https://www.muhak.co.kr/" class="swiper-slide" target="_blank" data-swiper-slide-index="7" style="width: 200px;">
+        <img src="./NC Dinos_files/img_footerlogo_14.jpg" alt="무학">
+      </a>
+      <a href="https://www.tving.com/onboarding" class="swiper-slide" target="_blank" data-swiper-slide-index="8" style="width: 200px;">
+        <img src="./NC Dinos_files/partner_tving.png" alt="티빙">
+      </a>
+      <a href="https://www.tongyeong.go.kr/main.web" class="swiper-slide" target="_blank" data-swiper-slide-index="9" style="width: 200px;">
+          <img src="./NC Dinos_files/partner_tongyeong.png" alt="통영시">
+      </a>
+      <a href="https://smartstore.naver.com/busanmilk" class="swiper-slide" target="_blank" data-swiper-slide-index="10" style="width: 200px;">
+          <img src="./NC Dinos_files/partner_busanMilk.png" alt="부산우유">
+      </a>
+      <a href="http://www.camc.co.kr/" class="swiper-slide" target="_blank" data-swiper-slide-index="11" style="width: 200px;">
+        <img src="./NC Dinos_files/img_footerlogo_11.jpg" alt="청아병원">
+      </a>
+      <a href="http://www.muruphospital.com/" class="swiper-slide swiper-slide-prev" target="_blank" data-swiper-slide-index="12" style="width: 200px;">
+        <img src="./NC Dinos_files/img_footerlogo_13.jpg" alt="무룹병원">
+      </a>
+      <a href="https://www.365plant.co.kr/" class="swiper-slide swiper-slide-active" target="_blank" data-swiper-slide-index="13" style="width: 200px;">
+        <img src="./NC Dinos_files/365dental.png" alt="365바른치과">
+      </a>
+    <a href="https://kr.ncsoft.com/kr/index.do" class="swiper-slide swiper-slide-duplicate swiper-slide-next" target="_blank" data-swiper-slide-index="0" style="width: 200px;">
+        <img src="./NC Dinos_files/img_footerlogo_01_2024.jpg" alt="NC">
+      </a><a href="https://banking.nonghyup.com/" class="swiper-slide swiper-slide-duplicate" target="_blank" data-swiper-slide-index="1" style="width: 200px;">
+        <img src="./NC Dinos_files/img_footerlogo_02.jpg" alt="NH bank">
+      </a><a href="http://www.pkpork.co.kr/" class="swiper-slide swiper-slide-duplicate" target="_blank" data-swiper-slide-index="2" style="width: 200px;">
+        <img src="./NC Dinos_files/img_footerlogo_03.jpg" alt="부경양돈농협">
+      </a><a href="http://brand.pkpork.co.kr/" class="swiper-slide swiper-slide-duplicate" target="_blank" data-swiper-slide-index="3" style="width: 200px;">
+        <img src="./NC Dinos_files/img_footerlogo_04.jpg" alt="포크밸리">
+      </a><a href="https://www.hitejinro.com/" class="swiper-slide swiper-slide-duplicate" target="_blank" data-swiper-slide-index="4" style="width: 200px;">
+        <img src="./NC Dinos_files/img_footerlogo_16.jpg" alt="켈리">
+      </a></div>
+    <!-- Add Arrows -->
+    <div class="ico ico-next" tabindex="0" role="button" aria-label="Next slide" aria-disabled="false"></div>
+    <div class="ico ico-prev swiper-button-disabled" tabindex="0" role="button" aria-label="Previous slide" aria-disabled="true"></div>
+  <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+</div>
+<div class="f-wrap">
+  <h1 class="f-logo"><img src="./NC Dinos_files/f_logo.png" alt="nc dinos"></h1>
+  <div class="privacy"><a href="https://www.ncdinos.com/term/privacy.do" style="font-size:1.1em;">개인정보처리방침</a></div>
+  <div class="info-wrap">
+    <ul class="f-menu">
+      <li><a href="https://www.ncdinos.com/term/agree.do">이용약관</a></li>
+      <li><a href="https://www.ncdinos.com/term/email.do">이메일무단수집거부</a></li>
+      <li><a href="https://www.ncdinos.com/term/faq.do">이용안내</a></li>
+      <li><a href="https://www.ncdinos.com/term/contact.do">CONTACT US</a></li>
+    </ul>
+    <p class="copy">
+      Copyright 2024 © NC Dinos Baseball Club. All Right Reserved.
+    </p>
+    <ul class="sns-wrap">
+    	<li><a href="http://www.youtube.com/user/ncdinos" target="_blank"><span class="ico ico-youtube">유투브</span></a></li>
+    	<li><a href="http://www.instagram.com/ncdinos2011" target="_blank"><span class="ico ico-insta">인스타그램</span></a></li>
+    	<li><a href="http://www.facebook.com/ncdinos" target="_blank"><span class="ico ico-facebook">페이스북</span></a></li>
+      <li><a href="https://twitter.com/ncdinos_fan" target="_blank"><span class="ico ico-twitter">트위터</span></a></li>
+    </ul>
+  </div>
+  <div class="family">
+    <a href="http://www.ncsoft.com/" target="_blank">  <img src="./NC Dinos_files/logo_footer_nc_2024.png" alt="NC"></a>
+    <a href="http://www.plaync.co.kr/" target="_blank"><img src="./NC Dinos_files/logo_footer_plaync_2024.png" alt="PLAY NC"></a>
+  </div>
+  <span class="p-txt">이 홈페이지는 문화체육관광부와 국민체육진흥공단의 재정후원으로 제작되었습니다.</span>
+</div>
+
+</footer>
+
+<script>
+    gameSlider(0);
+    newsSlider();
+    mainSlider();
+</script>
+
+
+</body></html>

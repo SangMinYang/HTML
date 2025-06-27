@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     
-    <title>Document</title>
-    <script src="./js/20EX.JS"></script>
+    <title>객체 시간 배열표</title>
+   
     <style>
             table {
       border: 1px solid red;
@@ -32,14 +32,27 @@
       width: 100px;
       padding: 5px;
     }
+    h3,
+    button,
+    input {
+      padding: 7px 20px;
+    }
     </style>
 </head>
 <body>
     <div id="root">
 
     </div>
-    <div id="root1">
-        
+    <hr>
+    <div>
+      <label for="newTime">시간</label>
+        <input type="time" id="newTime">
+        <label for="newTodo">할일</label>
+        <label for="text" id="newTodo"></label>
+        <button id="newBtn">새로운 스케줄 추가</button>
+      
     </div>
+     <script src="./js/20EX.JS"></script>
+    
 </body>
 </html>

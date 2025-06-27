@@ -1,0 +1,173 @@
+//pc일때, dropdown
+function dropAct(){
+	var $drop = $(".drop > a");
+	var $drop_menu = $(".drop > .drop-menu");
+
+	$drop.removeClass("active");
+	$drop_menu.hide();
+
+	//mouse
+	$drop.mouseover(function(){
+		$(this).addClass("active");
+		$drop.not($(this)).removeClass("active");
+
+		$drop.each(function(i){
+			if($drop.eq(i).hasClass("active")){
+				$drop.eq(i).next().show();
+			}else{
+				$drop.eq(i).next().hide();
+
+			}
+		});
+	});
+
+	$($drop_menu && ".drop").mouseleave(function(){
+		$drop.not($(this)).removeClass("active");
+		$drop_menu.hide();
+	});
+}
+
+$(function(){
+	// aside
+	$.each($("aside ul > li").has(">ul"),function(){
+		$(this).find(">a").click(function(){
+			$(this).parent().toggleClass("active");
+		});
+	});
+
+	$.each($("aside ul > li > ul > li").has(">ul"),function(){
+		$(this).find(">a").click(function(){
+			$(this).parent().toggleClass("active");
+		});
+	});
+
+	dropAct();
+
+	//layer popup close
+	$(".btn-layerpop-cls").on("click", function(){
+		$(".layer-popup").hide();
+		$("body").css({"height":"auto", "overflow":"initial"});
+	});
+	//layer popup close
+	$(".btn-layerpop-cancel").on("click", function(){
+		$(".layer-popup").hide();
+		$("body").css({"height":"auto", "overflow":"initial"});
+	});
+
+	// 버튼 on, off
+	$(".btn-onoff").on("click", function(){
+		$(this).toggleClass("active");
+	});
+
+	// tab
+	$(".tab .tab-btns > ul > li > a").click(function () {
+		var tabActive = $(this).attr("data-show");
+
+		$(".tab .tab-btns > ul > li > a").removeClass("active");
+		$(this).addClass("active");
+		$(".tab .tab-conts > .cont").removeClass("active");
+		$(".tab .tab-conts > #"+tabActive).addClass("active");
+	});
+});
+
+
+//common alert
+function commonAlert(message) {
+
+	  $( 'body' ).append( ' <div id="commonAlert" class="layer-popup add-admin-layer" style="display: block; z-index:1000;">'+
+	  ' <div class="dimmed"></div><div class="inner">' +
+	  '  <div class="head"><h3>알림</h3><a href="javascript:commonAlertRemove();" class="btn-layerpop-cls"></a></div>' +
+	  '<div class="cont">' +
+	  '<p>'+ message +'</p>'+
+	  '</div>' +
+	  ' <div class="btns">' +
+	  '  <a href="javascript:commonAlertRemove();" class="btn btn-bg-blue btn-md w30p">확인</a>'+
+	  '</div></div></div></div>');
+}
+
+//common alert
+function commonCheckAlert(message, func) {
+
+	 $( 'body' ).append( ' <div id="commonConfirm" class="layer-popup add-admin-layer" style="display: block; z-index:1000;">'+
+			  ' <div class="dimmed"></div><div class="inner">' +
+			  '  <div class="head"><h3>알림</h3><a href="javascript:commonConfirmRemove();" class="btn-layerpop-cls"></a></div>' +
+			  '<div class="cont">' +
+			  '<p>'+ message +'</p>'+
+			  '</div>' +
+			  ' <div class="btns">' +
+			  '  <a href="javascript:'+func+'" class="btn btn-bg-blue btn-md w30p">확인</a>'+
+			  '</div></div></div></div>');
+}
+
+
+function commonAlertRemove(){
+	$("#commonAlert").remove();
+}
+
+//common confirm
+function commonConfirm(message, yesCallBack) {
+
+	$( 'body' ).append( ' <div id="commonConfirm" class="layer-popup add-admin-layer" style="display: block; z-index:1000;">'+
+			  ' <div class="dimmed"></div><div class="inner">' +
+			  '  <div class="head"><h3>알림</h3><a href="javascript:commonConfirmRemove();" class="btn-layerpop-cls"></a></div>' +
+			  '<div class="cont">' +
+			  '<p>'+ message +'</p>'+
+			  '</div>' +
+			  ' <div class="btns">' +
+			  '  <a href="javascript:commonConfirmRemove();" class="btn btn-bg-gray btn-md w30p">취소</a>'+
+			  '  <a href="javascript:;" id="commonConfirmYes" class="btn btn-bg-blue btn-md w30p">확인</a>'+
+			  '</div></div></div></div>');
+
+	$('#commonConfirmYes').click(function () {
+		commonConfirmRemove();
+
+        if(typeof yesCallBack !== 'undefined'){
+            yesCallBack();
+        }
+    });
+}
+
+
+
+function commonConfirmRemove(){
+	$("#commonConfirm").remove();
+}
+
+function zeroPad(num, places) {
+	return String(num).padStart(places, '0');
+}
+
+function postPage(d){
+	var insdoc = "";
+	for (var i = 0; i < d.vals.length; i++) {
+		insdoc+= "<input type='hidden' name='"+ d.vals[i][0] +"' value='"+ d.vals[i][1] +"'>";
+	}
+	var goform = $("<form>", {
+		method: "get",
+		action: d.url,
+		target: "_self",
+		html: insdoc
+	}).appendTo("body");
+	goform.submit();
+}
+
+function requestJson(url, data, onSuccess) {
+	$.ajax({
+		url: url,
+		type: "POST",
+		dataType:"json",
+		contentType: "application/json; charset=utf-8",
+		data: JSON.stringify(data),
+		success: function (data) {
+			if (data.resultCode !== "200") {
+				commonAlert('<spring:message code="header.system_error" />');
+				return;
+			}
+
+			onSuccess(data);
+		},
+		error:function(err) {
+			commonAlert('<spring:message code="header.system_error" />');
+		}
+	});
+}
